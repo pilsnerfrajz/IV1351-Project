@@ -1,0 +1,10 @@
+insert into instructor_availability??? (time) values ('2022-06-10 10:03:26');
+insert into instructor_availability??? (time) values ('2022-08-01 18:24:33');
+insert into instructor_availability??? (time) values ('2022-08-04 20:15:42');
+insert into instructor_availability??? (time) values ('2022-02-16 18:38:05');
+insert into instructor_availability??? (time) values ('2022-10-04 02:37:25');
+insert into instructor_availability??? (time) values ('2022-10-11 11:43:57');
+insert into instructor_availability??? (time) values ('2022-08-19 11:45:45');
+insert into instructor_availability??? (time) values ('2022-10-11 01:14:07');
+insert into instructor_availability??? (time) values ('2022-01-26 21:12:42');
+insert into instructor_availability??? (time) values ('2022-08-25 01:08:35');
