@@ -60,3 +60,61 @@ VALUES
 ('Yamaha', 'Piano', '022-77-0622', 285,NULL),
 ('Yamaha', 'Piano', '820-57-0208', 151,NULL),
 ('Zildjan', 'Drums', '565-11-9348', 216,NULL);
+
+--Enums
+INSERT INTO genre (genre) VALUES
+('Percussion'), ('Flute'), ('Orchestra');
+
+INSERT INTO instructor_instrument (instrument) VALUES
+('Piano'), ('Guitar'), ('Drums'), ('Bass'), ('Trumpet'), ('Saxophone'),
+('Flute'), ('Cello'), ('Violin');
+
+INSERT INTO student_instrument (instrument) VALUES
+('Piano'), ('Guitar'), ('Drums'), ('Bass'), ('Trumpet'), ('Saxophone'),
+('Flute'), ('Cello'), ('Violin');
+
+INSERT INTO lesson_instrument (instrument) VALUES
+('Piano'), ('Guitar'), ('Drums'), ('Bass'), ('Trumpet'), ('Saxophone'),
+('Flute'), ('Cello'), ('Violin');
+
+INSERT INTO lesson_skill_level (skill_level) VALUES
+('Beginner'), ('Intermediate'), ('Advanced');
+
+INSERT INTO lesson_type (type) VALUES
+('Individual'), ('Group'), ('Ensemble');
+
+INSERT INTO student_skill_level (skill_level) VALUES
+('Beginner'), ('Intermediate'), ('Advanced');
+----
+
+INSERT INTO student_skills (student_id, student_instrument_id, student_skill_level_id)
+VALUES
+('1','2','3'),
+('2','7','1'),
+('3','1','2'),
+('4','4','3'),
+('5','8','3'),
+('6','9','1'),
+('7','5','1'),
+('8','2','3'),
+('9','3','2'),
+('10','9','3');
+
+INSERT INTO sibling (student_id, sibling_id) VALUES
+('1', '2'), ('1', '3'), ('4', '6');
+
+INSERT INTO plays_instrument (instructor_id, instructor_instrument_id) VALUES
+('1', '1'),
+--('1', '2'),
+('2', '5'),
+('3', '7'),
+('4', '8'),
+('5', '4'),
+('6', '9'),
+('7', '3'),
+('8', '6'),
+('9', '6'),
+('10', '1');
+
+
+--GÅR INTE ATT LÄGGA TILL FLERA INSTRUMENT PÅ INSTRUCTOR OCH STUDENT PÅ SAMMA KEY
