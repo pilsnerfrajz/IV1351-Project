@@ -88,45 +88,45 @@ VALUES
   ('Lydia','Mejia','194510264437','dictum.magna@aol.org','+46559037283','0','P.O. Box 941, 5627 Pede Rd.','38632','Jönköping'),
   ('Sybil','Carney','201902177128','malesuada.integer@yahoo.org','+46027773075','1','6824 Vitae, Road','61562','Vetlanda');
 
-INSERT INTO rental (start_date, end_date,student_id) 
-VALUES 
-('2022-12-01', '2023-05-17',(SELECT student_id FROM student WHERE first_name = 'Sawyer')),
-('2022-12-01', '2023-11-04',(SELECT student_id FROM student WHERE first_name = 'Sawyer')),
-('2022-12-01', '2023-04-13',(SELECT student_id FROM student WHERE first_name = 'Rhea')),
-('2022-12-01', '2023-11-09',(SELECT student_id FROM student WHERE first_name = 'Branden')),
-('2022-12-01', '2023-07-28',(SELECT student_id FROM student WHERE first_name = 'Tucker'));
-
-INSERT INTO instrument (instrument_brand_id, instrument_type_id, real_instrument_id, cost,rental_id) 
+INSERT INTO instrument (instrument_brand_id, instrument_type_id, real_instrument_id, cost) 
 VALUES 
 ((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Fender'), 
-(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '084-26-4796', 268,(SELECT rental_id FROM rental WHERE end_date = '2023-05-17')),
+(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '084-26-4796', 268),
 
 ((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Yamaha'), 
-(SELECT instrument_type_id FROM instrument_type WHERE type='Piano'), '501-01-5627', 234,(SELECT rental_id FROM rental WHERE end_date = '2023-11-04')),
+(SELECT instrument_type_id FROM instrument_type WHERE type='Piano'), '501-01-5627', 234),
 
 ((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Ibanez'), 
-(SELECT instrument_type_id FROM instrument_type WHERE type='Bass'), '931-31-8248', 162,(SELECT rental_id FROM rental WHERE end_date = '2023-04-13')),
+(SELECT instrument_type_id FROM instrument_type WHERE type='Bass'), '931-31-8248', 162),
 
 ((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Zildjan'), 
-(SELECT instrument_type_id FROM instrument_type WHERE type='Drums'), '785-65-1122', 225,(SELECT rental_id FROM rental WHERE end_date = '2023-11-09')),
+(SELECT instrument_type_id FROM instrument_type WHERE type='Drums'), '785-65-1122', 225),
 
 ((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Fender'), 
-(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '007-28-8162', 102,(SELECT rental_id FROM rental WHERE end_date = '2023-07-28')),
+(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '007-28-8162', 102),
 
 ((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Fender'), 
-(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '308-43-5788', 172,NULL),
+(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '308-43-5788', 172),
 
 ((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Fender'), 
-(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '913-07-2998', 176,NULL),
+(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '913-07-2998', 176),
 
 ((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Yamaha'), 
-(SELECT instrument_type_id FROM instrument_type WHERE type='Piano'), '022-77-0622', 285,NULL),
+(SELECT instrument_type_id FROM instrument_type WHERE type='Piano'), '022-77-0622', 285),
 
 ((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Yamaha'), 
-(SELECT instrument_type_id FROM instrument_type WHERE type='Piano'), '820-57-0208', 151,NULL),
+(SELECT instrument_type_id FROM instrument_type WHERE type='Piano'), '820-57-0208', 151),
 
 ((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Zildjan'), 
-(SELECT instrument_type_id FROM instrument_type WHERE type='Drums'), '565-11-9348', 216,NULL);
+(SELECT instrument_type_id FROM instrument_type WHERE type='Drums'), '565-11-9348', 216);
+
+INSERT INTO rental (start_date, end_date,student_id, instrument_id) 
+VALUES 
+('2022-12-01', '2023-05-17',(SELECT student_id FROM student WHERE first_name = 'Sawyer'), (SELECT instrument_id FROM instrument WHERE real_instrument_id='084-26-4796')),
+('2022-12-01', '2023-11-04',(SELECT student_id FROM student WHERE first_name = 'Sawyer'), (SELECT instrument_id FROM instrument WHERE real_instrument_id='501-01-5627')),
+('2022-12-01', '2023-04-13',(SELECT student_id FROM student WHERE first_name = 'Rhea'), (SELECT instrument_id FROM instrument WHERE real_instrument_id='931-31-8248')),
+('2022-12-01', '2023-11-09',(SELECT student_id FROM student WHERE first_name = 'Branden'), (SELECT instrument_id FROM instrument WHERE real_instrument_id='785-65-1122')),
+('2022-12-01', '2023-07-28',(SELECT student_id FROM student WHERE first_name = 'Tucker'), (SELECT instrument_id FROM instrument WHERE real_instrument_id='007-28-8162'));
 
 INSERT INTO student_skills (student_id, student_instrument_id, student_skill_level_id)
 VALUES
