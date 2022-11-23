@@ -1,3 +1,51 @@
+--Enums----------------------------------------------------
+INSERT INTO instrument_type (type) VALUES
+('Piano'), ('Guitar'), ('Drums'), ('Bass'), ('Trumpet'), ('Saxophone'),
+('Flute'), ('Cello'), ('Violin');
+
+INSERT INTO instrument_brand (brand) VALUES
+('Bach'),
+('Fender'),
+('Gibson'),
+('Ibanez'),
+('Sonor'),
+('Stuart & Sons'),
+('Stradivarius'),
+('Tama'),
+('Yamaha'),
+('Zildjan');
+
+INSERT INTO genre (genre) VALUES
+('Classic'), ('Rock'), ('Jazz'), ('Film'), ('Pop'), ('Funk');
+
+INSERT INTO instructor_instrument (instrument) VALUES
+('Piano'), ('Guitar'), ('Drums'), ('Bass'), ('Trumpet'), ('Saxophone'),
+('Flute'), ('Cello'), ('Violin');
+
+INSERT INTO student_instrument (instrument) VALUES
+('Piano'), ('Guitar'), ('Drums'), ('Bass'), ('Trumpet'), ('Saxophone'),
+('Flute'), ('Cello'), ('Violin');
+
+INSERT INTO lesson_instrument (instrument) VALUES
+('Piano'), ('Guitar'), ('Drums'), ('Bass'), ('Trumpet'), ('Saxophone'),
+('Flute'), ('Cello'), ('Violin');
+
+INSERT INTO lesson_skill_level (skill_level) VALUES
+('Beginner'), ('Intermediate'), ('Advanced');
+
+INSERT INTO lesson_type (type) VALUES
+('Individual'), ('Group'), ('Ensemble');
+
+INSERT INTO student_skill_level (skill_level) VALUES
+('Beginner'), ('Intermediate'), ('Advanced');
+
+INSERT INTO price_type (type) VALUES
+('Individual'), ('Group'), ('Ensemble');
+
+INSERT INTO price_skill_level (skill_level) VALUES
+('Beginner'), ('Intermediate'), ('Advanced');
+-----------------------------------------------------------
+
 INSERT INTO contact_person (first_name,last_name,email,phone)
 VALUES
   ('Zeus','Walker','risus.nulla@hotmail.org','+46422137590'),
@@ -34,87 +82,118 @@ VALUES
   ('Allegra','Santana','196112088130','sed.dictum.proin@yahoo.org','+46365287389','0','Ap #891-1179 Pede, St.','35165','Södertälje'),
   ('Isabella','Whitehead','193004216978','lectus.sit.amet@outlook.org','+46692446867','0','180-9259 Arcu Street','34790','Linköping'),
   ('Dominic','Rosario','197105287762','tortor@protonmail.ca','+46855881751','1','Ap #599-935 Curabitur Street','33516','Upplands Väsby'),
-  ('Leroy','Holland','197701017175','convallis.convallis.dolor@google.com','+46286425572','0','Ap #668-6199 Parturient Rd.','22322','Märsta'),
+  ('Leroy','Jenkins','197701017175','convallis.convallis.dolor@google.com','+46286425572','0','Ap #668-6199 Parturient Rd.','22322','Märsta'),
   ('Matthew','Wade','199509196342','pellentesque.ut@hotmail.edu','+46707634527','1','Ap #799-4702 Nec St.','14418','Avesta'),
   ('Aurelia','Sosa','199402041710','maecenas.mi@outlook.edu','+46407205860','0','P.O. Box 709, 9395 Magna. Rd.','32561','Hofors'),
   ('Lydia','Mejia','194510264437','dictum.magna@aol.org','+46559037283','0','P.O. Box 941, 5627 Pede Rd.','38632','Jönköping'),
   ('Sybil','Carney','201902177128','malesuada.integer@yahoo.org','+46027773075','1','6824 Vitae, Road','61562','Vetlanda');
 
-INSERT INTO rental (end_date,student_id) 
+INSERT INTO rental (start_date, end_date,student_id) 
 VALUES 
-('2023-05-17',(SELECT student_id FROM student WHERE first_name = 'Sawyer')),
-('2023-11-04',(SELECT student_id FROM student WHERE first_name = 'Sawyer')),
-('2023-04-13',(SELECT student_id FROM student WHERE first_name = 'Rhea')),
-('2023-11-09',(SELECT student_id FROM student WHERE first_name = 'Branden')),
-('2023-07-28',(SELECT student_id FROM student WHERE first_name = 'Tucker'));
+('2022-12-01', '2023-05-17',(SELECT student_id FROM student WHERE first_name = 'Sawyer')),
+('2022-12-01', '2023-11-04',(SELECT student_id FROM student WHERE first_name = 'Sawyer')),
+('2022-12-01', '2023-04-13',(SELECT student_id FROM student WHERE first_name = 'Rhea')),
+('2022-12-01', '2023-11-09',(SELECT student_id FROM student WHERE first_name = 'Branden')),
+('2022-12-01', '2023-07-28',(SELECT student_id FROM student WHERE first_name = 'Tucker'));
 
-INSERT INTO instrument (brand, type, real_instrument_id, cost,rental_id) 
+INSERT INTO instrument (instrument_brand_id, instrument_type_id, real_instrument_id, cost,rental_id) 
 VALUES 
-('Fender', 'Guitar', '084-26-4796', 268,(SELECT rental_id FROM rental WHERE end_date = '2023-05-17')),
-('Yamaha', 'Piano', '501-01-5627', 234,(SELECT rental_id FROM rental WHERE end_date = '2023-11-04')),
-('Ibanez', 'Bass', '931-31-8248', 162,(SELECT rental_id FROM rental WHERE end_date = '2023-04-13')),
-('Zildjan', 'Drums', '785-65-1122', 225,(SELECT rental_id FROM rental WHERE end_date = '2023-11-09')),
-('Fender', 'Guitar', '007-28-8162', 102,(SELECT rental_id FROM rental WHERE end_date = '2023-07-28')),
-('Fender', 'Guitar', '308-43-5788', 172,NULL),
-('Fender', 'Guitar', '913-07-2998', 176,NULL),
-('Yamaha', 'Piano', '022-77-0622', 285,NULL),
-('Yamaha', 'Piano', '820-57-0208', 151,NULL),
-('Zildjan', 'Drums', '565-11-9348', 216,NULL);
+((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Fender'), 
+(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '084-26-4796', 268,(SELECT rental_id FROM rental WHERE end_date = '2023-05-17')),
 
---Enums
-INSERT INTO genre (genre) VALUES
-('Percussion'), ('Flute'), ('Orchestra');
+((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Yamaha'), 
+(SELECT instrument_type_id FROM instrument_type WHERE type='Piano'), '501-01-5627', 234,(SELECT rental_id FROM rental WHERE end_date = '2023-11-04')),
 
-INSERT INTO instructor_instrument (instrument) VALUES
-('Piano'), ('Guitar'), ('Drums'), ('Bass'), ('Trumpet'), ('Saxophone'),
-('Flute'), ('Cello'), ('Violin');
+((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Ibanez'), 
+(SELECT instrument_type_id FROM instrument_type WHERE type='Bass'), '931-31-8248', 162,(SELECT rental_id FROM rental WHERE end_date = '2023-04-13')),
 
-INSERT INTO student_instrument (instrument) VALUES
-('Piano'), ('Guitar'), ('Drums'), ('Bass'), ('Trumpet'), ('Saxophone'),
-('Flute'), ('Cello'), ('Violin');
+((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Zildjan'), 
+(SELECT instrument_type_id FROM instrument_type WHERE type='Drums'), '785-65-1122', 225,(SELECT rental_id FROM rental WHERE end_date = '2023-11-09')),
 
-INSERT INTO lesson_instrument (instrument) VALUES
-('Piano'), ('Guitar'), ('Drums'), ('Bass'), ('Trumpet'), ('Saxophone'),
-('Flute'), ('Cello'), ('Violin');
+((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Fender'), 
+(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '007-28-8162', 102,(SELECT rental_id FROM rental WHERE end_date = '2023-07-28')),
 
-INSERT INTO lesson_skill_level (skill_level) VALUES
-('Beginner'), ('Intermediate'), ('Advanced');
+((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Fender'), 
+(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '308-43-5788', 172,NULL),
 
-INSERT INTO lesson_type (type) VALUES
-('Individual'), ('Group'), ('Ensemble');
+((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Fender'), 
+(SELECT instrument_type_id FROM instrument_type WHERE type='Guitar'), '913-07-2998', 176,NULL),
 
-INSERT INTO student_skill_level (skill_level) VALUES
-('Beginner'), ('Intermediate'), ('Advanced');
-----
+((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Yamaha'), 
+(SELECT instrument_type_id FROM instrument_type WHERE type='Piano'), '022-77-0622', 285,NULL),
+
+((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Yamaha'), 
+(SELECT instrument_type_id FROM instrument_type WHERE type='Piano'), '820-57-0208', 151,NULL),
+
+((SELECT instrument_brand_id FROM instrument_brand WHERE brand='Zildjan'), 
+(SELECT instrument_type_id FROM instrument_type WHERE type='Drums'), '565-11-9348', 216,NULL);
 
 INSERT INTO student_skills (student_id, student_instrument_id, student_skill_level_id)
 VALUES
-('1','2','3'),
-('2','7','1'),
-('3','1','2'),
-('4','4','3'),
-('5','8','3'),
-('6','9','1'),
-('7','5','1'),
-('8','2','3'),
-('9','3','2'),
-('10','9','3');
+(1,2,3),
+(1,1,3),
+(2,7,1),
+(3,1,2),
+(4,4,3),
+(5,8,3),
+(6,9,1),
+(7,5,1),
+(8,2,3),
+(9,3,2),
+(10,9,3);
 
 INSERT INTO sibling (student_id, sibling_id) VALUES
-('1', '2'), ('1', '3'), ('4', '6');
+(1, 2), (1, 3), (4, 6), (2, 1), (3, 1), (6, 4);
 
 INSERT INTO plays_instrument (instructor_id, instructor_instrument_id) VALUES
-('1', '1'),
---('1', '2'),
-('2', '5'),
-('3', '7'),
-('4', '8'),
-('5', '4'),
-('6', '9'),
-('7', '3'),
-('8', '6'),
-('9', '6'),
-('10', '1');
+(1, 1),
+(1, 2),
+(2, 5),
+(3, 7),
+(4, 8),
+(5, 4),
+(6, 9),
+(7, 3),
+(8, 6),
+(9, 6),
+(10, 1);
 
+INSERT INTO booking (date, time, instructor_id) VALUES
+('2022-12-01', '08:00:00', 1);
 
---GÅR INTE ATT LÄGGA TILL FLERA INSTRUMENT PÅ INSTRUCTOR OCH STUDENT PÅ SAMMA KEY
+INSERT INTO booked_students (student_id, booking_id) VALUES
+(1, (SELECT booking_id FROM booking WHERE time='08:00:00' AND date='2022-12-01' AND instructor_id=1));
+
+INSERT INTO lesson_price (price, instructor_payment, sibling_discount, price_type_id, price_skill_level_id) VALUES
+--Individual, beginner
+(100, 60, 10, (SELECT price_type_id FROM price_type WHERE type='Individual'), 
+(SELECT price_skill_level_id FROM price_skill_level WHERE skill_level='Beginner')),
+--Individual, intermediate
+(120, 80, 10, (SELECT price_type_id FROM price_type WHERE type='Individual'), 
+(SELECT price_skill_level_id FROM price_skill_level WHERE skill_level='Intermediate')),
+--Individual, advanced
+(140, 100, 10, (SELECT price_type_id FROM price_type WHERE type='Individual'), 
+(SELECT price_skill_level_id FROM price_skill_level WHERE skill_level='Advanced')),
+--Group, beginner
+(80, 60, 5, (SELECT price_type_id FROM price_type WHERE type='Group'), 
+(SELECT price_skill_level_id FROM price_skill_level WHERE skill_level='Beginner')),
+--Group, intermediate
+(100, 80, 5, (SELECT price_type_id FROM price_type WHERE type='Group'), 
+(SELECT price_skill_level_id FROM price_skill_level WHERE skill_level='Intermediate')),
+--Group, advanced
+(120, 100, 5, (SELECT price_type_id FROM price_type WHERE type='Group'), 
+(SELECT price_skill_level_id FROM price_skill_level WHERE skill_level='Advanced')),
+--Ensemble
+(110, 70, 5, (SELECT price_type_id FROM price_type WHERE type='Ensemble'), NULL);
+
+INSERT INTO lesson (booking_id, lesson_type_id, lesson_skill_level_id, lesson_price_id,
+max_number_of_students, min_number_of_students, genre_id, lesson_instrument_id)
+VALUES
+(1, 
+(SELECT lesson_type_id FROM lesson_type WHERE type='Individual'),
+(SELECT lesson_skill_level_id FROM lesson_skill_level WHERE skill_level='Advanced'),
+(SELECT lesson_price_id FROM lesson_price WHERE 
+price_type_id=(SELECT price_type_id FROM price_type WHERE type='Individual') 
+AND price_skill_level_id=(SELECT price_skill_level_id FROM price_skill_level WHERE skill_level='Advanced')),
+NULL, NULL, NULL,
+(SELECT lesson_instrument_id FROM lesson_instrument WHERE instrument='Piano'));
