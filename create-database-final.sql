@@ -26,7 +26,7 @@ CREATE TABLE instructor (
  phone VARCHAR(20) NOT NULL,
  teaches_ensemble BIT(1) NOT NULL,
  street VARCHAR(500) NOT NULL,
- zip CHAR(5) NOT NULL,
+ zip VARCHAR(100) NOT NULL,
  city VARCHAR(500) NOT NULL
 );
 
@@ -113,7 +113,7 @@ CREATE TABLE student (
  email VARCHAR(500) UNIQUE,
  phone VARCHAR(20),
  street VARCHAR(500) NOT NULL,
- zip CHAR(5) NOT NULL,
+ zip VARCHAR(100) NOT NULL,
  city VARCHAR(500) NOT NULL,
  contact_person_id INT
 );
