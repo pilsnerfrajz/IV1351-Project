@@ -17,14 +17,6 @@ GROUP BY i.first_name, i.last_name, i.person_number
 HAVING COUNT(*) >= 0 -- Change
 ORDER BY COUNT(*) DESC;
 
--- Test
-SELECT type, b.date, COUNT(*) FROM lesson_type GROUP BY type;
-SELECT t.type, COUNT(*) FROM lesson AS l 
-INNER JOIN booking AS b ON b.booking_id = l.booking_id 
-INNER JOIN lesson_type AS t ON t.lesson_type_id=l.lesson_type_id
-WHERE b.date BETWEEN '2022-01-01' AND '2022-02-01'
-GROUP BY t.type;
-
 -- total lessons per month
 SELECT EXTRACT(MONTH from b.date) AS month, COUNT(*) AS lessons_given 
 FROM lesson AS l 
@@ -58,5 +50,18 @@ FROM lesson AS l
 INNER JOIN booking AS b ON b.booking_id = l.booking_id 
 INNER JOIN lesson_type AS t ON t.lesson_type_id=l.lesson_type_id
 WHERE b.date BETWEEN '2022-01-01' AND '2022-12-31' AND l.lesson_type_id = 3
+GROUP BY month
+ORDER BY month;
+
+-- Show total lessons per month, and the number of lessons for each type per month
+SELECT EXTRACT(MONTH from b.date) AS month,
+COUNT(*) AS lessons_given,
+SUM(CASE WHEN l.lesson_type_id = 1 THEN 1 ELSE 0 END) AS individual,
+SUM(CASE WHEN l.lesson_type_id = 2 THEN 1 ELSE 0 END) AS group,
+SUM(CASE WHEN l.lesson_type_id = 3 THEN 1 ELSE 0 END) AS ensemble
+FROM lesson AS l 
+INNER JOIN booking AS b ON b.booking_id = l.booking_id 
+INNER JOIN lesson_type AS t ON t.lesson_type_id=l.lesson_type_id
+WHERE b.date BETWEEN '2022-01-01' AND '2022-12-31'
 GROUP BY month
 ORDER BY month;
