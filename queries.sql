@@ -9,8 +9,6 @@ SELECT COUNT(*) FROM (SELECT student_id, COUNT(student_id) FROM sibling GROUP BY
 UNION
 SELECT COUNT(*) FROM (SELECT student_id, COUNT(student_id) FROM sibling GROUP BY student_id HAVING COUNT(sibling_id) = 2) as f;
 
-SELECT EXTRACT(dow FROM date) AS 'day of week' FROM booking;
-
 -- Show all given lessons by the instructors
 SELECT i.first_name, i.last_name, i.person_number, COUNT(*) AS lessons_given FROM instructor AS i 
 INNER JOIN booking AS b ON i.instructor_id = b.instructor_id 
@@ -46,7 +44,7 @@ GROUP BY month
 ORDER BY month;
 
 -- Group
-SELECT EXTRACT(MONTH from b.date) AS month, COUNT(l.lesson_type_id) AS individual
+SELECT EXTRACT(MONTH from b.date) AS month, COUNT(l.lesson_type_id) AS group
 FROM lesson AS l 
 INNER JOIN booking AS b ON b.booking_id = l.booking_id 
 INNER JOIN lesson_type AS t ON t.lesson_type_id=l.lesson_type_id
@@ -55,15 +53,10 @@ GROUP BY month
 ORDER BY month;
 
 -- Ensemble
-SELECT EXTRACT(MONTH from b.date) AS month, COUNT(l.lesson_type_id) AS individual
+SELECT EXTRACT(MONTH from b.date) AS month, COUNT(l.lesson_type_id) AS ensemble
 FROM lesson AS l 
 INNER JOIN booking AS b ON b.booking_id = l.booking_id 
 INNER JOIN lesson_type AS t ON t.lesson_type_id=l.lesson_type_id
 WHERE b.date BETWEEN '2022-01-01' AND '2022-12-31' AND l.lesson_type_id = 3
 GROUP BY month
 ORDER BY month;
-
-
-
-
-
