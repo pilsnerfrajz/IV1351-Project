@@ -58,8 +58,8 @@ WHERE (SELECT EXTRACT(YEAR FROM b.date)) = '2022'
 GROUP BY month, year
 ORDER BY month;
 
--- CREATE VIEW
-CREATE VIEW show_lessons AS
+-- CREATE VIEW to show total lessons per month, and the number of lessons for each type per month for a specific year
+CREATE VIEW lessons_per_month AS
 SELECT EXTRACT(YEAR from b.date) AS year, EXTRACT(MONTH from b.date) AS month,
 COUNT(*) AS lessons_given,
 SUM(CASE WHEN l.lesson_type_id = 1 THEN 1 ELSE 0 END) AS individual,
