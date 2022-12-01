@@ -1028,7 +1028,7 @@ SUM(CASE WHEN student_id NOT IN (SELECT student_id FROM sibling) THEN 1 ELSE 0 E
 (SELECT COUNT(*) FROM (SELECT student_id, COUNT(student_id) FROM sibling GROUP BY student_id HAVING COUNT(sibling_id) = 2) AS two) AS two_siblings
 FROM student;
 
--- CREATE VIEW for lessons
+-- CREATE VIEW to show total lessons per month, and the number of lessons for each type per month for a specific year
 CREATE VIEW lessons_per_month AS
 SELECT EXTRACT(YEAR from b.date) AS year, EXTRACT(MONTH from b.date) AS month,
 COUNT(*) AS lessons_given,
