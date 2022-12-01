@@ -2,7 +2,7 @@
 SELECT * FROM show_siblings;
 
 -- Query for showing given lessons the current month
-SELECT * FROM lessons_given WHERE lessons_given > 0; -- 0 = variable
+SELECT * FROM given_lessons WHERE lessons_given > 0; -- 0 = variable
 
 -- Query for showing total lessons per month for a specific year
 SELECT * FROM lessons_per_month WHERE year = '2022'; -- 2022 = variable
