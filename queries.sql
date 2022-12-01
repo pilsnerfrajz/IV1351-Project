@@ -11,29 +11,20 @@ SELECT * FROM lessons_per_month WHERE year = '2022'; -- 2022 = variable
 SELECT * FROM ensembles_next_week;
 
 
-SELECT siblings, COUNT(*) AS students FROM (SELECT COUNT(sibling_id) AS siblings FROM sibling GROUP BY student_id) AS x
-GROUP BY siblings
-UNION
-SELECT 0, (SELECT SUM(CASE WHEN student_id NOT IN (SELECT student_id FROM sibling) THEN 1 ELSE 0 END) AS f)
-FROM student
-ORDER BY siblings;
-
-
-
 -- Show the number of students that has 0, 1 or 2 siblings
-SELECT siblings, COUNT(*) AS students FROM (SELECT COUNT(sibling_id) AS siblings FROM sibling GROUP BY student_id) AS x
+SELECT siblings, COUNT(*) AS students FROM (SELECT COUNT(sibling_id) AS siblings FROM sibling GROUP BY student_id) AS foo
 GROUP BY siblings
 UNION
-SELECT 0, (SELECT SUM(CASE WHEN student_id NOT IN (SELECT student_id FROM sibling) THEN 1 ELSE 0 END) AS f)
+SELECT 0, (SELECT SUM(CASE WHEN student_id NOT IN (SELECT student_id FROM sibling) THEN 1 ELSE 0 END) AS bar)
 FROM student
 ORDER BY siblings;
 
 -- CREATE VIEW for siblings
 CREATE VIEW show_siblings AS
-SELECT siblings, COUNT(*) AS students FROM (SELECT COUNT(sibling_id) AS siblings FROM sibling GROUP BY student_id) AS x
+SELECT siblings, COUNT(*) AS students FROM (SELECT COUNT(sibling_id) AS siblings FROM sibling GROUP BY student_id) AS foo
 GROUP BY siblings
 UNION
-SELECT 0, (SELECT SUM(CASE WHEN student_id NOT IN (SELECT student_id FROM sibling) THEN 1 ELSE 0 END) AS f)
+SELECT 0, (SELECT SUM(CASE WHEN student_id NOT IN (SELECT student_id FROM sibling) THEN 1 ELSE 0 END) AS bar)
 FROM student
 ORDER BY siblings;
 
