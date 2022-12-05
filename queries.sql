@@ -7,7 +7,7 @@ SELECT * FROM given_lessons WHERE lessons_given > 0; -- 0 = variable
 -- Query for showing total lessons per month for a specific year
 SELECT * FROM lessons_per_month WHERE year = '2022'; -- 2022 = variable
 
--- Query for showing all ensembles the following week
+-- Query for showing all ensembles the following week. May output null if no ensembles are booked
 SELECT * FROM ensembles_next_week;
 
 
@@ -34,7 +34,7 @@ SELECT i.first_name, i.last_name, i.person_number, COUNT(*) AS lessons_given FRO
 INNER JOIN booking AS b ON i.instructor_id = b.instructor_id 
 WHERE (SELECT EXTRACT(MONTH FROM b.date)) = (SELECT EXTRACT(MONTH FROM NOW()))
 GROUP BY i.first_name, i.last_name, i.person_number
-HAVING COUNT(*) >= 0 -- Change
+HAVING COUNT(*) > 0 -- Change
 ORDER BY COUNT(*) DESC;
 
 -- CREATE VIEW to show all given lessons by the instructors the current month
