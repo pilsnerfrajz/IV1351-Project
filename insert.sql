@@ -1022,10 +1022,10 @@ AND price_skill_level_id=(SELECT price_skill_level_id FROM price_skill_level WHE
 
 -- CREATE VIEW for siblings
 CREATE VIEW show_siblings AS
-SELECT siblings, COUNT(*) AS students FROM (SELECT COUNT(sibling_id) AS siblings FROM sibling GROUP BY student_id) AS x
+SELECT siblings, COUNT(*) AS students FROM (SELECT COUNT(sibling_id) AS siblings FROM sibling GROUP BY student_id) AS foo
 GROUP BY siblings
 UNION
-SELECT 0, (SELECT SUM(CASE WHEN student_id NOT IN (SELECT student_id FROM sibling) THEN 1 ELSE 0 END) AS f)
+SELECT 0, (SELECT SUM(CASE WHEN student_id NOT IN (SELECT student_id FROM sibling) THEN 1 ELSE 0 END) AS bar)
 FROM student
 ORDER BY siblings;
 
